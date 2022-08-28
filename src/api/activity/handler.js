@@ -1,7 +1,6 @@
 class ActivityHandler {
-  constructor(service, validator) {
+  constructor(service) {
     this._service = service;
-    this._validator = validator;
 
     // Bind all method
     this.postActivityHandler = this.postActivityHandler.bind(this);
@@ -12,8 +11,6 @@ class ActivityHandler {
   }
 
   async postActivityHandler({ payload }, h) {
-    // Validate payload
-    this._validator.validateActivityPayload(payload);
     // Calling activityService to insert activity data
     const activity = await this._service.addActivity(payload);
 
@@ -26,7 +23,7 @@ class ActivityHandler {
   }
 
   async getAllActivityHandler() {
-    // Call activityService to getting activities data
+    // Call activityService to get activities
     const activity = await this._service.getAllActivity();
 
     // Return json response contain activities data with 200 status code success
@@ -38,9 +35,7 @@ class ActivityHandler {
   }
 
   async getActivityByIdHandler({ params }) {
-    // Validate params.activityId
-    this._validator.validateActivityParams(params);
-    // Call activityService to getting specific activity data
+    // Call activityService to get specific activity
     const activity = await this._service.getActivity(params);
 
     // Return json response contain activity data with 200 status code success
@@ -48,14 +43,10 @@ class ActivityHandler {
       status: 'Success',
       message: 'Success',
       data: activity,
-    }
+    };
   }
 
   async patchActivityByIdHandler({ params, payload }) {
-    // Validate params.activityId
-    this._validator.validateActivityParams(params);
-    // Validate payload
-    this._validator.validateActivityPayload(payload);
     // Call activityService to update specific activity
     const activity = await this._service.editActivity(params, payload);
 
@@ -64,24 +55,20 @@ class ActivityHandler {
       status: 'Success',
       message: 'Success',
       data: activity,
-    }
+    };
   }
 
   async deleteActivityByIdHandler({ params }) {
-    // Validate params.activityId
-    this._validator.validateActivityParams(params);
     // Calling activityService to delete specific activity
     const activity = await this._service.deleteActivity(params);
-    
+
     // Return json response with 200 status code
     return {
       status: 'Success',
       message: 'Success',
-      data: activity
-    }
+      data: activity,
+    };
   }
 }
 
 module.exports = ActivityHandler;
-
-module

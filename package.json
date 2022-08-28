@@ -4,19 +4,22 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start-app": "npx sequelize-cli db:migrate && nodemon src/server.js"
+    "start": "npx sequelize-cli db:migrate && nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.3.0"
   },
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
     "dotenv": "^10.0.0",
-    "joi": "^17.5.0",
+    "joi": "^17.6.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^7.0.0-alpha.2"
+    "sequelize": "^6.21.4"
   }
 }
